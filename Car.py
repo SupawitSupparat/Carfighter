@@ -47,11 +47,16 @@ class MyGame(arcade.Window):
         self.player1_sprite = None
         self.bullet1_list = None
         self.player1_check = True
+        self.player1_currentkey = None
+
+
         self.player2_list = None
         self.player2_sprite = None
         self.plater2_wall = None
         self.bullet2_list = None
         self.player2_check = True
+        self.player2_currentkey =None
+
         self.instruct = True
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -136,38 +141,47 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
-
-        if key == arcade.key.UP:
-            self.player2_sprite.change_x = 0
-            self.player2_sprite.change_y = MOVEMENT_SPEED
-        elif key == arcade.key.DOWN:
-            self.player2_sprite.change_x = 0
-            self.player2_sprite.change_y = -MOVEMENT_SPEED
-        elif key == arcade.key.LEFT:
-            self.player2_sprite.change_y = 0
-            self.player2_sprite.change_x = -MOVEMENT_SPEED
-        elif key == arcade.key.RIGHT:
-            self.player2_sprite.change_y = 0
-            self.player2_sprite.change_x = MOVEMENT_SPEED
-  
-        if key == arcade.key.W:
+        if key == arcade.key.W and self.player1_currentkey != "S":
+            self.player1_currentkey = "W"
             self.player1_sprite.change_x = 0
             self.player1_sprite.change_y = MOVEMENT_SPEED
-        elif key == arcade.key.S:
+        elif key == arcade.key.S and self.player1_currentkey != "W":
+            self.player1_currentkey = "S"
             self.player1_sprite.change_x = 0
             self.player1_sprite.change_y = -MOVEMENT_SPEED
-        elif key == arcade.key.A:
+        elif key == arcade.key.A and self.player1_currentkey != "D":
+            self.player1_currentkey = "A"
             self.player1_sprite.change_y = 0
             self.player1_sprite.change_x = -MOVEMENT_SPEED
-        elif key == arcade.key.D:
+        elif key == arcade.key.D and self.player1_currentkey != "A":
+            self.player1_currentkey = "D"
             self.player1_sprite.change_y = 0
             self.player1_sprite.change_x = MOVEMENT_SPEED
+        
+        if key == arcade.key.UP and self.player2_currentkey != "DOWN"  :
+            self.player2_currentkey = "UP"
+            self.player2_sprite.change_x = 0
+            self.player2_sprite.change_y = MOVEMENT_SPEED
+        elif key == arcade.key.DOWN and self.player2_currentkey != "UP":
+            self.player2_currentkey = "DOWN"
+            self.player2_sprite.change_x = 0
+            self.player2_sprite.change_y = -MOVEMENT_SPEED
+        elif key == arcade.key.LEFT and self.player2_currentkey != "RIGHT":
+            self.player2_currentkey = "LEFT"
+            self.player2_sprite.change_y = 0
+            self.player2_sprite.change_x = -MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT and self.player2_currentkey != "LEFT":
+            self.player2_currentkey = "RIGHT"
+            self.player2_sprite.change_y = 0
+            self.player2_sprite.change_x = MOVEMENT_SPEED
 
         if key == arcade.key.SPACE:
             self.setup()
             self.instruct = False
             self.player1_check = True
             self.player2_check = True
+            self.player1_currentkey = None
+            self.player2_currentkey = None
 
 
     # def on_key_release(self, key, modifiers):
