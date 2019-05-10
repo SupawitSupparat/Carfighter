@@ -4,7 +4,7 @@ import os
 
 SPRITE_SCALING = 0.1
 
-SCREEN_WIDTH = 1500
+SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
 SPRITE_SCALING_LASER = 0.8
 centerx = 0
@@ -74,9 +74,8 @@ class MyGame(arcade.Window):
         self.player1_sprite.center_x = 50
         self.player1_sprite.center_y = 400
         self.player1_list.append(self.player1_sprite)
-
         self.player2_sprite = Player("images/player2_block.png")
-        self.player2_sprite.center_x = 1450
+        self.player2_sprite.center_x = 1150
         self.player2_sprite.center_y = 400
         self.player2_list.append(self.player2_sprite)
 
@@ -99,9 +98,9 @@ class MyGame(arcade.Window):
             self.bullet1_list.draw()
             self.bullet2_list.draw()  
             if self.player1_check == False :
-                arcade.draw_text("Player 2 Win", 600, 400, arcade.color.WHITE, 50)
+                arcade.draw_text("Player 2 Win", 400, 400, arcade.color.WHITE, 50)
             elif self.player2_check == False : 
-                arcade.draw_text("Player 1 Win", 600, 400, arcade.color.WHITE, 50)
+                arcade.draw_text("Player 1 Win", 400, 400, arcade.color.WHITE, 50)
 
     def update(self, delta_time):
         """ Movement and game logic """
@@ -128,7 +127,6 @@ class MyGame(arcade.Window):
                     self.bullet2_list.update()
             
         Player1_hit_Player2 = arcade.check_for_collision_with_list(self.player1_sprite, self.bullet2_list)
-
 
         Player2_hit_Player1 = arcade.check_for_collision_with_list(self.player2_sprite, self.bullet1_list)
   
